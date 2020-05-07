@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IntervalTimerComponent } from './interval-timer/interval-timer.component';
 import { AppComponent } from './app.component';
 import { DefaultComponent } from './default/default.component';
+import { RoutineComponent } from './routine/routine.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'intervals',
     component: IntervalTimerComponent,
+  },
+  {
+    path: 'routines',
+    component: RoutineComponent,
   }
 ];
 

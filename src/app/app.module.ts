@@ -7,12 +7,14 @@ import { IntervalTimerComponent } from './interval-timer/interval-timer.componen
 import { DefaultComponent } from './default/default.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RoutineComponent } from './routine/routine.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IntervalTimerComponent,
-    DefaultComponent
+    DefaultComponent,
+    RoutineComponent
   ],
   imports: [
     BrowserModule,
