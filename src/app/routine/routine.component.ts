@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IntervalTimerService } from '../services/interval-timer.service';
 import { RoutineData, emptyArrayRoutineData, emptyRoutineData } from '../models/routine-data';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-routine',
@@ -11,18 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RoutineComponent implements OnInit {
 
   routineData: RoutineData[] = emptyArrayRoutineData();
-  routineDataToAdd: RoutineData = emptyRoutineData();
-  form: FormGroup;
 
   constructor(
-    public formBuilder: FormBuilder,
-    private _intervalTimerService: IntervalTimerService) {
-    this.form = this.formBuilder.group({
-      'routineId': [this.routineDataToAdd.routineId],
-      'routineName': [this.routineDataToAdd.routineName],
-      'workTime': [this.routineDataToAdd.workTime],
-      'restTime': [this.routineDataToAdd.restTime]
-    });
+    private _intervalTimerService: IntervalTimerService,
+    private _router: Router) {
   }
 
   ngOnInit() {
@@ -34,16 +26,19 @@ export class RoutineComponent implements OnInit {
   }
 
   addRoutine() {
-    this.routineData.push(this.form.value);
-    this._intervalTimerService.saveRoutine(this.form.value).subscribe( result => {
-      if (result) {
-        this.routineData.push(result);
-      }
-    });
+    this._router.navigate(['/add-routine']);
   }
 
-  deleteRoutine() {
-    this._intervalTimerService.deleteRoutine(1).subscribe();
+  runRoutine(id: number) {
+    this._router.navigate([`/intervaltimer/${id}`]);
+  }
+
+  deleteRoutine(id: number) {
+    this._intervalTimerService.deleteRoutine(id).subscribe( () => {
+      this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this._router.onSameUrlNavigation = 'reload';
+      this._router.navigate(['/routines']);
+    });
   }
 
 }

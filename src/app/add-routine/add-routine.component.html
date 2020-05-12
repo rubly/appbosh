@@ -1,0 +1,13 @@
+<h2>New Routine</h2>
+<form [formGroup]="form">
+    <label>Routine Id:</label>
+    <input type="text" formControlName="routineId"><br><br>
+    <label>Routine Name:</label>
+    <input type="text" formControlName="routineName"><br><br>
+    <label>Work Time:</label>
+    <input type="number" formControlName="workTime"><br><br>
+    <label>Rest Time:</label>
+    <input type="number"  formControlName="restTime"><br><br>
+</form>
+
+<button class="favorite styled" type="button" (click)="addRoutine()">Save Routine</button>

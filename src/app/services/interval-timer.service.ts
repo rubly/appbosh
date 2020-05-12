@@ -16,6 +16,10 @@ export class IntervalTimerService {
     return this._httpClient.get<RoutineData[]>(this._url);
   }
 
+  getRoutine(id: number): Observable<RoutineData> {
+    return this._httpClient.get<RoutineData>(`${this._url}/${id}`);
+  }
+
   saveRoutine(routine: RoutineData): Observable<RoutineData> {
     return this._httpClient.post<RoutineData>(this._url, routine);
   }

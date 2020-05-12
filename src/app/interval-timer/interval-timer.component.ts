@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IntervalTimerService } from '../services/interval-timer.service';
 import { RoutineData, emptyArrayRoutineData, emptyRoutineData } from '../models/routine-data';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -11,31 +13,72 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class IntervalTimerComponent implements OnInit {
 
-  routineData: RoutineData[] = emptyArrayRoutineData();
-  routineDataToAdd: RoutineData = emptyRoutineData();
-  form: FormGroup;
+  routineData: RoutineData = emptyRoutineData();
+  routineId: number;
+  workTime: number;
+  restTime: number;
+  workTimerId;
+  restTimerId;
+  pause = false;
 
   constructor(
-    public formBuilder: FormBuilder,
-    private _intervalTimerService: IntervalTimerService) {
-    this.form = this.formBuilder.group({
-      'routineId': [this.routineDataToAdd.routineId],
-      'routineName': [this.routineDataToAdd.routineName],
-      'workTime': [this.routineDataToAdd.workTime],
-      'restTime': [this.routineDataToAdd.restTime]
-    });
+    private _intervalTimerService: IntervalTimerService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this._intervalTimerService.getRoutines().subscribe( result => {
-      if (result) {
-        this.routineData = result;
-      }
+    this.routineId = this.getRoutineId(this._activatedRoute);
+    this._intervalTimerService.getRoutine(this.routineId).subscribe( result => {
+      this.routineData = result;
+      this.workTime = this.routineData.workTime;
+      this.restTime = this.routineData.restTime;
     });
   }
 
-  addRoutine() {
-    this.routineData.push(this.form.value);
+  runRoutine() {
+      if (!this.pause) {
+        this.workTime = this.routineData.workTime;
+        this.restTime = this.routineData.restTime;
+      } else {
+        this.pause = false;
+      }
+      this.workTimerId = setInterval(() => {
+        this.workTime --;
+        if (this.workTime === 0) {
+          clearInterval(this.workTimerId);
+          this.restTimerId = setInterval(() => {
+              this.restTime --;
+              if (this.restTime === 0) {
+                clearInterval(this.restTimerId);
+              }
+          }, 1000 );
+        }
+      }, 1000 );
+  }
+
+  stopRoutine() {
+    clearInterval(this.workTimerId);
+    clearInterval(this.restTimerId);
+  }
+
+  pauseRoutine() {
+    this.pause = true;
+    clearInterval(this.workTimerId);
+    clearInterval(this.restTimerId);
+  }
+
+  getRoutineId(route: ActivatedRoute): number {
+    const id = route.snapshot.paramMap.get('id') as unknown as number;
+    if (id != null) {
+        return id;
+    } else {
+        return 0;
+    }
+  }
+
+  backToRoutines() {
+    this._router.navigate(['/routines']);
   }
 
 }

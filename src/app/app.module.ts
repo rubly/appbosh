@@ -8,13 +8,15 @@ import { DefaultComponent } from './default/default.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutineComponent } from './routine/routine.component';
+import { AddRoutineComponent } from './add-routine/add-routine.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IntervalTimerComponent,
     DefaultComponent,
-    RoutineComponent
+    RoutineComponent,
+    AddRoutineComponent
   ],
   imports: [
     BrowserModule,
