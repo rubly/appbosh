@@ -1,8 +1,10 @@
 <h1>Interval Timer</h1>
 
 <h2>{{ routineData.routineName }} Routine</h2>
-<div>{{ workTime }}</div>
-<div>{{ restTime }}</div>
+<div>Number Rounds: {{routineData.numberRounds}}</div>
+<div>Current Round: {{currentRound}}</div>
+<div>Work Time: {{ workTime }}</div>
+<div>Rest Time: {{ restTime }}</div>
 <button class="favorite styled" type="button" (click)="runRoutine()">Start Routine</button>
 <button class="favorite styled" type="button" (click)="stopRoutine()">Stop Routine</button>
 <button class="favorite styled" type="button" (click)="pauseRoutine()">Pause Routine</button>

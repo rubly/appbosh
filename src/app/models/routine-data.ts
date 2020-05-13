@@ -3,6 +3,7 @@ export interface RoutineData {
     routineName: string;
     workTime: number;
     restTime: number;
+    numberRounds: number;
 }
 
 export function emptyRoutineData(): RoutineData {
@@ -11,6 +12,7 @@ export function emptyRoutineData(): RoutineData {
         routineName: '',
         workTime: 0,
         restTime: 0,
+        numberRounds: 0,
     };
 }
 
@@ -20,5 +22,6 @@ export function emptyArrayRoutineData(): RoutineData[] {
         routineName: '',
         workTime: 0,
         restTime: 0,
+        numberRounds: 0,
     }];
 }

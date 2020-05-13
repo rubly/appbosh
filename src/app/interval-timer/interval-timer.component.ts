@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IntervalTimerService } from '../services/interval-timer.service';
 import { RoutineData, emptyArrayRoutineData, emptyRoutineData } from '../models/routine-data';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-
-
 
 @Component({
   selector: 'app-interval-timer',
@@ -17,9 +14,11 @@ export class IntervalTimerComponent implements OnInit {
   routineId: number;
   workTime: number;
   restTime: number;
+  currentRound: number;
   workTimerId;
   restTimerId;
   pause = false;
+  run = true;
 
   constructor(
     private _intervalTimerService: IntervalTimerService,
@@ -33,6 +32,7 @@ export class IntervalTimerComponent implements OnInit {
       this.routineData = result;
       this.workTime = this.routineData.workTime;
       this.restTime = this.routineData.restTime;
+      this.currentRound = this.routineData.numberRounds;
     });
   }
 
@@ -40,26 +40,43 @@ export class IntervalTimerComponent implements OnInit {
       if (!this.pause) {
         this.workTime = this.routineData.workTime;
         this.restTime = this.routineData.restTime;
+        this.currentRound = this.routineData.numberRounds;
       } else {
         this.pause = false;
       }
-      this.workTimerId = setInterval(() => {
+      this.runIntervals(this.currentRound);
+  }
+
+  runIntervals(numberRounds: number) {
+    this.workTimerId = setInterval(() => {
+      if (this.workTime > 0) {
         this.workTime --;
-        if (this.workTime === 0) {
-          clearInterval(this.workTimerId);
-          this.restTimerId = setInterval(() => {
-              this.restTime --;
-              if (this.restTime === 0) {
-                clearInterval(this.restTimerId);
+      }
+      if (this.workTime <= 0) {
+        clearInterval(this.workTimerId);
+        this.restTimerId = setInterval(() => {
+            this.restTime --;
+            if (this.restTime === 0) {
+              clearInterval(this.restTimerId);
+              this.currentRound --;
+              numberRounds --;
+              if (numberRounds > 0) {
+                  this.workTime = this.routineData.workTime;
+                  this.restTime = this.routineData.restTime;
+                  this.runIntervals(numberRounds);
               }
-          }, 1000 );
-        }
-      }, 1000 );
+            }
+        }, 1000 );
+      }
+    }, 1000 );
   }
 
   stopRoutine() {
     clearInterval(this.workTimerId);
     clearInterval(this.restTimerId);
+    this.workTime = this.routineData.workTime;
+    this.restTime = this.routineData.restTime;
+    this.currentRound = this.routineData.numberRounds;
   }
 
   pauseRoutine() {
