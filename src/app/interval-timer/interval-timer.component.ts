@@ -80,9 +80,11 @@ export class IntervalTimerComponent implements OnInit {
   }
 
   pauseRoutine() {
-    this.pause = true;
-    clearInterval(this.workTimerId);
-    clearInterval(this.restTimerId);
+    if (!this.pause) {
+      this.pause = true;
+      clearInterval(this.workTimerId);
+      clearInterval(this.restTimerId);
+    }
   }
 
   getRoutineId(route: ActivatedRoute): number {

@@ -6,6 +6,7 @@
             <th>Routine Name</th>
             <th>Work Time</th>
             <th>Rest Time</th>
+            <th>Number Rounds</th>
             <th></th>
             <th></th>
         </tr>
@@ -16,12 +17,13 @@
             <td>{{ routine.routineName }}</td>
             <td>{{ routine.workTime }}</td>
             <td>{{ routine.restTime }}</td>
-            <td><button class="favorite" type="button" (click)="runRoutine(routine.id)">Run Routine</button></td>
-            <td><button class="favorite" type="button" (click)="deleteRoutine(routine.id)">Delete Routine</button></td>
+            <td>{{ routine.numberRounds }}</td>
+            <td><button  type="button" (click)="runRoutine(routine.id)">Run Routine</button></td>
+            <td><button  type="button" (click)="deleteRoutine(routine.id)">Delete Routine</button></td>
         </tr>
     </tbody>
 </table>
 <br>
 
-<button class="favorite styled" type="button" (click)="addRoutine()">Add New Routine</button>
+<button class="styled" type="button" (click)="addRoutine()">Add New Routine</button>
 

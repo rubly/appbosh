@@ -23,7 +23,8 @@ export class AddRoutineComponent implements OnInit {
       'routineId': [this.routineDataToAdd.routineId],
       'routineName': [this.routineDataToAdd.routineName],
       'workTime': [this.routineDataToAdd.workTime],
-      'restTime': [this.routineDataToAdd.restTime]
+      'restTime': [this.routineDataToAdd.restTime],
+      'numberRounds': [this.routineDataToAdd.numberRounds],
     });
   }
 
