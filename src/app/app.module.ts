@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutineComponent } from './routine/routine.component';
 import { AddRoutineComponent } from './add-routine/add-routine.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     IntervalTimerComponent,
     DefaultComponent,
     RoutineComponent,
-    AddRoutineComponent
+    AddRoutineComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
