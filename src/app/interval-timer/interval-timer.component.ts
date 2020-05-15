@@ -71,6 +71,15 @@ export class IntervalTimerComponent implements OnInit {
     }, 1000 );
   }
 
+  getCurrentRound() {
+    let currentRound = this.routineData.numberRounds + 1 - this.currentRound;;
+    if (currentRound <= this.routineData.numberRounds) {
+      return currentRound;
+    } else {
+      return currentRound -1;
+    }
+  }
+
   stopRoutine() {
     clearInterval(this.workTimerId);
     clearInterval(this.restTimerId);

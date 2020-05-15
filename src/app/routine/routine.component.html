@@ -1,11 +1,11 @@
 <app-header></app-header>
 
-<div class="main">
-<h1>Routines</h1>
-<table>
+<div class="main container">
+<br>
+<h2>Routines</h2>
+<table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-            <th>Routine Id</th>
             <th>Routine Name</th>
             <th>Work Time</th>
             <th>Rest Time</th>
@@ -16,18 +16,17 @@
     </thead>
     <tbody>
         <tr *ngFor = "let routine of routineData">
-            <td>{{ routine.routineId }}</td>
             <td>{{ routine.routineName }}</td>
             <td>{{ routine.workTime }}</td>
             <td>{{ routine.restTime }}</td>
             <td>{{ routine.numberRounds }}</td>
-            <td><button  type="button" (click)="runRoutine(routine.id)">Run Routine</button></td>
-            <td><button  type="button" (click)="deleteRoutine(routine.id)">Delete</button></td>
+            <td><button  class="btn btn-secondary" type="button" (click)="runRoutine(routine.id)">Run</button></td>
+            <td><button  class="btn btn-secondary" type="button" (click)="deleteRoutine(routine.id)">Delete</button></td>
         </tr>
     </tbody>
 </table>
 <br>
 
-<button class="styled" type="button" (click)="addRoutine()">Add New Routine</button>
+<button class="btn btn-dark" type="button" (click)="addRoutine()">Add New Routine</button>
 </div>
 

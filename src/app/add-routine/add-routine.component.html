@@ -1,18 +1,30 @@
 <app-header></app-header>
-<div class="main">
-<h2>New Routine</h2>
+<div class="container">
+    <br><br>
+<h3>Add Routine</h3>
+<br>
 <form [formGroup]="form">
-    <label>Routine Id:</label>
-    <input type="text" formControlName="routineId"><br><br>
-    <label>Routine Name:</label>
-    <input type="text" formControlName="routineName"><br><br>
-    <label>Work Time:</label>
-    <input type="number" formControlName="workTime"><br><br>
-    <label>Rest Time:</label>
-    <input type="number"  formControlName="restTime"><br><br>
-    <label>Number Rounds:</label>
-    <input type="number"  formControlName="numberRounds"><br><br>
+    <div class="form-group">
+        <label>Routine Name:</label>
+        <input class="form-control" type="text" formControlName="routineName" placeholder="Routine name...">
+    </div>
+    <div class="form-group">
+        <label>Number Rounds:</label>
+        <input class="form-control" type="number"  formControlName="numberRounds">
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+        <label>Work Time:</label>
+        <input class="form-control" type="number" formControlName="workTime">
+    </div>
+    <div class="form-group col-md-6">
+        <label>Rest Time:</label>
+        <input class="form-control" type="number"  formControlName="restTime">
+    </div>
+    </div>
 </form>
+<br>
+<button class="btn btn-default btn-dark mx-2" type="button" (click)="addRoutine()">Save Routine</button>
+<button class="btn btn-default btn-dark" type="button" (click)="toRoutines()">Back to Routines</button>
 
-<button class="favorite styled" type="button" (click)="addRoutine()">Save Routine</button>
 </div>

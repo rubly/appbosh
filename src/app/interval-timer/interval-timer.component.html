@@ -1,15 +1,23 @@
 <app-header></app-header>
-<div class="main">
-<h1>Interval Timer</h1>
+<div class="container">
+<br>
 
-<h2>{{ routineData.routineName }} Routine</h2>
-<div>Number Rounds: {{routineData.numberRounds}}</div>
-<div>Current Round: {{currentRound}}</div>
-<div>Work Time: {{ workTime }}</div>
-<div>Rest Time: {{ restTime }}</div>
-<button class="favorite styled" type="button" (click)="runRoutine()">Start Routine</button>
-<button class="favorite styled" type="button" (click)="stopRoutine()">Stop Routine</button>
-<button class="favorite styled" type="button" (click)="pauseRoutine()">Pause Routine</button>
-
-<button class="favorite styled" type="button" (click)="backToRoutines()">Back to Routines</button>
+<h2 class="text-capitalize">{{ routineData.routineName }} Routine</h2>
+<h2 class="">Round: {{getCurrentRound()}} / {{routineData.numberRounds}}</h2>
+<div class="row container">
+<div style="background:green !important" class="jumbotron col-md-5">
+    <h2 class="text-center">Work</h2>
+    <p class="text-center font-weight-bold timer">{{ workTime }}</p>
+</div>
+<div class="col-md-1"></div>
+<div style="background:red !important" class="jumbotron col-md-5">
+    <h2 class="text-center">Rest</h2>
+    <p class="text-center font-weight-bold timer">{{ restTime }}</p> 
+</div>
+</div>
+<br>
+<button class="btn btn-default btn-dark mx-2" type="button" (click)="runRoutine()">Start Routine</button>
+<button class="btn btn-default btn-dark mx-2" type="button" (click)="stopRoutine()">Stop Routine</button>
+<button class="btn btn-default btn-dark mx-2" type="button" (click)="pauseRoutine()">Pause Routine</button>
+<button class="btn btn-default btn-dark mx-2" type="button" (click)="backToRoutines()">Back to Routines</button>
 </div>

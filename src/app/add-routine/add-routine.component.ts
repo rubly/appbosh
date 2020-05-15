@@ -20,7 +20,6 @@ export class AddRoutineComponent implements OnInit {
     private _router: Router,
     ) {
     this.form = this.formBuilder.group({
-      'routineId': [this.routineDataToAdd.routineId],
       'routineName': [this.routineDataToAdd.routineName],
       'workTime': [this.routineDataToAdd.workTime],
       'restTime': [this.routineDataToAdd.restTime],
@@ -37,6 +36,10 @@ export class AddRoutineComponent implements OnInit {
         this._router.navigate(['/routines']);
       }
     });
+  }
+
+  toRoutines() {
+    this._router.navigate(['/routines']);
   }
 
 }
